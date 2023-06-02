@@ -1,4 +1,4 @@
-package org.example.runners;
+package com.GenISys_task.runners;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
@@ -15,9 +15,9 @@ import org.junit.runner.RunWith;
                 // "me.jvt.cucumber.report.PrettyReports:target.cucumber"
         },
         features = "src/test/resources",
-        glue = "org/example/Step_Definitions",
+        glue = "com/GenISys_task/step_Definitions",
         dryRun = false,
-        tags = "@mhmmd"
+        tags = "@wip"
 )
 public class CukesRunner {
 

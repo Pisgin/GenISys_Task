@@ -1,6 +1,6 @@
-package org.example.utilities;
+package com.GenISys_task.utilities;
 
-import org.example.utilities.Driver;
+import com.GenISys_task.utilities.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;

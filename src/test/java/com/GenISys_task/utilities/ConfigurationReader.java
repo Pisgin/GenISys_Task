@@ -1,4 +1,4 @@
-package org.example.utilities;
+package com.GenISys_task.utilities;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class ConfigurationReader {
         try {
 
             //2- We need to open the file in java memory: FileInputStream
-            FileInputStream file = new FileInputStream("Configuration.properties");
+            FileInputStream file = new FileInputStream("configuration.properties");
 
             //3- Load the properties object using FileInputStream object
             properties.load(file);
