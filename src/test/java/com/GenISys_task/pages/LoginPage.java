@@ -1,6 +1,5 @@
 package com.GenISys_task.pages;
 
-import com.GenISys_task.pages.registerPage.*;
 import com.GenISys_task.utilities.BrowserUtils;
 import com.GenISys_task.utilities.Driver;
 import org.junit.Assert;
@@ -8,9 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class loginPage {
+public class LoginPage {
 
-    public loginPage(){
+    public LoginPage(){
 
         PageFactory.initElements(Driver.getDriver() , this);
     }
@@ -34,8 +33,7 @@ public class loginPage {
 
     //---------------------------------------------VARIABLES---------------------------------------
 
-    registerPage registerPage = new registerPage();
-
+    RegisterPage registerPage = new RegisterPage();
     String email = registerPage.email;
 
     //---------------------------------------------METHODS-----------------------------------------
@@ -44,10 +42,8 @@ public class loginPage {
 
         returninigUserButton.click();
         BrowserUtils.sleep(1);
-
         emailBox.sendKeys(email);
         BrowserUtils.sleep(1);
-
         login_enterButton.click();
     }
 

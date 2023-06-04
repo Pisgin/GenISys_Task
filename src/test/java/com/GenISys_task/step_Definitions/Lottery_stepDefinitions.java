@@ -1,30 +1,25 @@
 package com.GenISys_task.step_Definitions;
 
-import com.GenISys_task.pages.casinoGamePage;
-import com.GenISys_task.pages.loginPage;
-import com.GenISys_task.pages.registerPage;
-import com.GenISys_task.pages.lotteryPage;
-import com.GenISys_task.utilities.BrowserUtils;
+import com.GenISys_task.pages.CasinoGamePage;
+import com.GenISys_task.pages.LoginPage;
+import com.GenISys_task.pages.RegisterPage;
+import com.GenISys_task.pages.LotteryPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import javax.swing.text.AbstractDocument;
-
 public class Lottery_stepDefinitions {
 
-    lotteryPage lotteryPage = new lotteryPage();
-    registerPage registerPage = new registerPage();
-    loginPage loginPage = new loginPage();
-    casinoGamePage casinoGamePage = new casinoGamePage();
+    LotteryPage lotteryPage = new LotteryPage();
+    CasinoGamePage casinoGamePage = new CasinoGamePage();
 
 
-    //--------------------------------------scenario---------------------------------
+    //--------------------------------------SCENARIO 5---------------------------------
 
 
-    @Given("kullanici tour sayfasindan login olup Lottery sayfasina gidebilmeli")
-    public void kullanici_tour_sayfasindan_login_olup_lottery_sayfasina_gidebilmeli() {
+    @Given("The user can be able to login from the tour page and go to the Lottery page")
+    public void the_user_can_be_able_to_login_from_the_tour_page_and_go_to_the_lottery_page() {
 
         casinoGamePage.tourPage();
 
@@ -34,26 +29,33 @@ public class Lottery_stepDefinitions {
 
     }
 
-    @When("kullanici tek bilet olarak Lottery satin alabilmeli")
-    public void kullanici_tek_bilet_olarak_lottery_satin_alabilmeli() {
+    @When("The user can be able to add new lottery")
+    public void the_user_can_be_able_to_add_new_lottery() {
 
-        lotteryPage.satin_alma();
+        lotteryPage.add_ticket();
+
+        lotteryPage.delete_ticket();
 
     }
 
-    @Then("kulllanici satin almadan sonra bakiyedeki degisimi gorebilmelidir")
-    public void kulllanici_satin_almadan_sonra_bakiyedeki_degisimi_gorebilmelidir() {
+    @And("The user can be able to buy Lottery as a single ticket")
+    public void the_user_can_be_able_to_buy_lottery_as_a_single_ticket() {
+
+        lotteryPage.secim();
+    }
+
+    @Then("The user can be able to see the change in the balance after the purchase")
+    public void the_user_can_be_able_to_see_the_change_in_the_balance_after_the_purchase() {
 
         lotteryPage.check();
-
     }
 
-    //--------------------------------------scenario---------------------------------
+
+    //--------------------------------------SCENARIO 6---------------------------------
 
 
-
-    @When("kullanici yeni lotteryler ekleyebilmeli")
-    public void kullanici_yeni_lotteryler_ekleyebilmeli() {
+    @And("The user can be able to add new lotteries")
+    public void the_user_can_be_able_to_add_new_lotteries() {
 
         lotteryPage.add_ticket();
 
@@ -65,22 +67,16 @@ public class Lottery_stepDefinitions {
 
     }
 
-
-    @And("kullanici yeni lotterylere secim yapabilmeli")
-    public void kullanici_yeni_lotterylere_secim_yapabilmeli() {
+    @And("The user can be able to choose new lotteries")
+    public void the_user_can_be_able_to_choose_new_lotteries() {
 
         lotteryPage.secim();
-
     }
 
-    @And("kullanici lotteryleri satin alabilmeli")
-    public void kullanici_lotteryleri_satin_alabilmeli() {
+    @And("THe user can be able to buy lotteries")
+    public void t_he_user_can_be_able_to_buy_lotteries() {
 
         lotteryPage.lottery_satin_alma();
-
     }
-
-
-
 
 }

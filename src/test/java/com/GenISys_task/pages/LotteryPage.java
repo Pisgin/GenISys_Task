@@ -2,7 +2,7 @@ package com.GenISys_task.pages;
 
 import com.GenISys_task.utilities.BrowserUtils;
 import com.GenISys_task.utilities.Driver;
-import com.github.javafaker.Faker;
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class lotteryPage {
+public class LotteryPage {
 
-    public lotteryPage(){
+    public LotteryPage(){
 
         PageFactory.initElements(Driver.getDriver() , this);
     }
@@ -47,16 +47,15 @@ public class lotteryPage {
     @FindBy ( xpath = "//select[@class = 'form-input']")
     private WebElement draws;
 
-
     //-------------------------------------VARIABLES----------------------------------------
 
-    casinoGamePage casinoGamePage = new casinoGamePage();
+    CasinoGamePage casinoGamePage = new CasinoGamePage();
 
     Random randomNum = new Random();
     int toplam_ticket;
     String temprory_budget_1 , temprory_budget_2;
     String budget_1 ="" , budget_2 = "";
-    double cash_1 , cash_2;
+    double value1, value2 , cash_1 , cash_2;
 
 
     //--------------------------------------METHODS-----------------------------------------
@@ -76,61 +75,32 @@ public class lotteryPage {
         toplam_ticket = tickets.size();
 
         List<WebElement> lotterys = Driver.getDriver().findElements(By.xpath("//div[@class = 'lottery-ticket__number']"));
+
         for (int i = 0; i < toplam_ticket; i++) {
             ArrayList<Integer> numbers = new ArrayList<Integer>();
+            int k = 0;
             for (int j = 0 ; j < 7 ; j++ ){
+                int value = randomNum.nextInt(50);
 
-                if (!(numbers.contains(randomNum.nextInt(49) + 50 * i + 1))){
-                    numbers.add(randomNum.nextInt(49) + 50 * i + 1);
-                    lotterys.get(numbers.get(j)).click();
+                if (!(numbers.contains(value + (50 * i)))){
+                    numbers.add( value + (50 * i));
+                    int a = numbers.get(k++);
+                    lotterys.get(a).click();
+                }else {
+                    j--;
                 }
             }
 
-            System.out.println("numbers = " + numbers);
         }
-        BrowserUtils.sleep(1);
-
-
-    }
-
-    public void String_to_Double_1(){
-
-        temprory_budget_1 = money.getText();
-        for ( int i = 1 ; i < temprory_budget_1.length() ; i++ ){
-            budget_1 = budget_1 + temprory_budget_1.charAt(i);
-        }
-        cash_1 = Double.parseDouble(budget_1);
-
-    }
-
-    public void String_to_Double_2(){
-
-        temprory_budget_2 = money.getText();
-        for ( int i = 1 ; i < temprory_budget_2.length() ; i++ ){
-            budget_2 = budget_2 + temprory_budget_2.charAt(i);
-        }
-        cash_2 = Double.parseDouble(budget_2);
-
-    }
-
-    public void satin_alma(){
-
-        String_to_Double_1();
-
-        buyTicketsButton.click();
-        BrowserUtils.sleep(1);
-
-        String_to_Double_2();
-
+        BrowserUtils.sleep(2);
     }
 
     public void check(){
 
-        if (cash_2 < cash_1) {
+        if (value2 < value1 ) {
 
-            System.out.println("ilk bakiye : " + cash_1 + "--" + "guncel bakiye : " + cash_2 );
+            System.out.println("ilk bakiye : " + value1 + "--" + "guncel bakiye : " + value2 );
             System.out.println("BİLET SATIN ALINMISTIR");
-            ;
         }
         else
             System.out.println("SATIN ALINMAMISTIR");
@@ -146,29 +116,24 @@ public class lotteryPage {
     public void delete_ticket(){
 
         deleteButton.click();
-
         Alert alert = Driver.getDriver().switchTo().alert();
-
         alert.accept();
-
         BrowserUtils.sleep(1);
-
 
     }
 
     public void lottery_satin_alma(){
 
-        String_to_Double_1();
+        value1 = casinoGamePage.String_t0_Double1();
 
         Select select = new Select(draws);
         select.selectByIndex(3);
         buyTicketsButton.click();
         BrowserUtils.sleep(5);
 
-        String_to_Double_2();
+        value2 = casinoGamePage.String_to_Double2();
 
     }
-
 
 }
 

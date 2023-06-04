@@ -1,11 +1,7 @@
 package com.GenISys_task.pages;
 
-import com.GenISys_task.pages.registerPage;
 import com.GenISys_task.utilities.BrowserUtils;
 import com.GenISys_task.utilities.Driver;
-import groovyjarjarantlr4.v4.runtime.dfa.SparseEdgeMap;
-import io.cucumber.java.cs.Ale;
-import org.codehaus.groovy.transform.SourceURIASTTransformation;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -14,13 +10,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import java.sql.SQLOutput;
 import java.util.List;
-import java.util.concurrent.BrokenBarrierException;
 
-public class casinoGamePage {
+public class CasinoGamePage {
 
-    public casinoGamePage() {
+    public CasinoGamePage() {
 
         PageFactory.initElements(Driver.getDriver(), this);
     }
@@ -72,9 +66,9 @@ public class casinoGamePage {
 
     //-------------------------------------VARIABLES----------------------------------
 
-    registerPage registerPage = new registerPage();
+    RegisterPage registerPage = new RegisterPage();
 
-    loginPage loginPage = new loginPage();
+    LoginPage loginPage = new LoginPage();
 
     public String email = loginPage.email;
 
@@ -83,12 +77,15 @@ public class casinoGamePage {
     String budget_1= "";
     String budget_2= "";
 
+    double value1 = 0;
+    double value2 = 0;
+
     double cash_1;
     double cash_2;
 
     //--------------------------------------METHODS-----------------------------------
 
-    public void String_to_Double_1(){
+    public double String_t0_Double1(){
 
         temprory_budget_1 = money.getText();
 
@@ -97,9 +94,12 @@ public class casinoGamePage {
         }
 
         cash_1 = Double.parseDouble(budget_1);
+
+        return cash_1;
+
     }
 
-    public void String_to_Double_2(){
+    public double String_to_Double2(){
 
         temprory_budget_2 = money.getText();
 
@@ -108,41 +108,36 @@ public class casinoGamePage {
         }
 
         cash_2 = Double.parseDouble(budget_2);
+
+        return cash_2;
+
+
     }
 
     public void bakiye_arttirma(){
 
         depositButton.click();
         BrowserUtils.sleep(1);
-
         Select select = new Select(selectBox);
         select.selectByIndex(1);
-
         Select select1 = new Select(betBox);
         select1.selectByIndex(2);
-
         cardButton.click();
-
         _500Button.click();
-
         depositApprovedButton.click();
-
         OKButton.click();
     }
 
     public void tourPage() {
 
         registerPage.go_to_website();
-
         loginPage.login();
-
     }
 
     public void casinoGame() {
 
         navigation.click();
         BrowserUtils.sleep(1);
-
         casinoButton.click();
         BrowserUtils.sleep(1);
     }
@@ -154,72 +149,49 @@ public class casinoGamePage {
         List<WebElement> imagesList = Driver.getDriver().findElements(By.xpath("//img[@class = 'option__image']"));
 
         for (WebElement image : imagesList) {
-
             image.click();
             BrowserUtils.sleep(1);
-
             Alert alert = Driver.getDriver().switchTo().alert();
-
             alert.accept();
-
             BrowserUtils.sleep(1);
         }
-
         Driver.getDriver().switchTo().parentFrame();
     }
 
     public void bakiye_update(){
 
         BrowserUtils.sleep(1);
-
-        String_to_Double_1();
+        value1 = String_t0_Double1();
 
         if (cash_1 == 0.00){
-
             money.click();
-
             cardButton.click();
-
             _500Button.click();
-
             depositApprovedButton.click();
-
             OKButton.click();
-
         }
 
     }
 
     public void casinoGame_bakiye_update(){
 
-        String_to_Double_1();  // 1. para    0.0
-
-        //System.out.println("cash_1 = " + cash_1);
+        value1 = String_t0_Double1();
 
         Driver.getDriver().switchTo().frame("game");
 
-        bakiye_arttirma();  // ekleme olacak 500
+        bakiye_arttirma();
 
         Driver.getDriver().switchTo().parentFrame();
 
         BrowserUtils.sleep(5);
-        String_to_Double_2();  //2. para    500
-       // System.out.println("cash_2 = " + cash_2);
 
-        /*
-        logo.click();
-
-        casinoGame();
-
-         */
+        value2 = String_to_Double2();
 
     }
 
     public void bakiye_check(){
 
-      //  Assert.assertTrue("TOPLAM BAKIYE ARTMISTIR" ,cash_1 < cash_2);
-
-        if (cash_1 < cash_2)
+        if (value1< value2)
             System.out.println("TOPLAM BAKIYE ARTMISTIR");
         else
             System.out.println("HERHANGI BİR DEGISIKLIK OLMADI");
@@ -234,14 +206,13 @@ public class casinoGamePage {
         Driver.getDriver().switchTo().parentFrame();
 
         for (WebElement image : imagesList ) {
-            cash_1= 0;
-            cash_2 = 0;
+
             temprory_budget_1 = "";
             temprory_budget_2 = "";
             budget_1 = "";
             budget_2 = "";
 
-            String_to_Double_1();
+            value1 = String_t0_Double1();
 
             Driver.getDriver().switchTo().frame("game");
 
@@ -250,30 +221,30 @@ public class casinoGamePage {
 
             Driver.getDriver().switchTo().parentFrame();  // IFRAME HANDLE
 
-            String_to_Double_2();
+            value2 = String_to_Double2();
 
-            if ( cash_2 > cash_1 )
-                System.out.println(size + ". kedı kazandırdı");
+            if (value2 > value1)
+                System.out.println(size + ". cat won");
             else
-                System.out.println(size + ". kedi kaybettirdi");
+                System.out.println(size + ". cat losed");
 
             size++;
-
             bakiye_control();
         }
 
     }
 
-    public void bakiye_control(){
+    public void bakiye_control() {
 
-        System.out.print("cash_1 = " + cash_1 + "   /   " + " cash_2 = " + cash_2);
-        System.out.println();
-        System.out.println();
+        if (value2 > value1) {
 
-        if (cash_2 > cash_1)
             System.out.println("YOU WON!");
-        else
-            System.out.println("YOU LOST");
+            Assert.assertTrue(value2 > value1);
 
+        } else {
+            System.out.println("YOU LOST");
+            Assert.assertTrue(value2 <= value1);
+
+        }
     }
 }

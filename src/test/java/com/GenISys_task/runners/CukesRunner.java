@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
         },
         features = "src/test/resources",
         glue = "com/GenISys_task/step_Definitions",
-        dryRun = false,
+        dryRun = false  ,
         tags = "@wip"
 )
 public class CukesRunner {

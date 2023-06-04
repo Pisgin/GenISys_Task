@@ -1,59 +1,57 @@
-
 @wip
-Feature: kullanıcı sisteme register olabilmeli
+Feature: Register / Login / play Casino game / play Lottery game
+
+  Scenario: The user can be able to register to the system
+
+    Given The user can be able to navigate to the tour page
+    When The user can be able to log in as a new user
+    And The user can be able to enter their email address
+    And The user can be able to enter phone number
+    And The user can be able to enter name and surname
+    And The user can be able to set a password
+    Then The user registration can be completed.
 
 
-  Scenario: kullanici sisteme register olabilmelidir
+  Scenario: With the registered user information can be able to login
 
-    Given kullanici tour sayfasına gelebilmeli
-    When kullanici yeni kullanici girisi yapabilmeli
-    And kullanici email adresini girebilmeli
-    And kullanici telefon numarasi girebilmeli
-    And kullanici ad soyad girisi yapabilmeli
-    And kullanici sifre belirleyebilmeli
-    Then kullanicinin kayit islemi tamamlanmalidir..
+    Given The user can be able to navigate to the tour page
+    When The user can be able to login
+    Then The user can be able to check that he/she are logged in
 
 
-  Scenario: register olan kullanici bilgisi ile login olabilmelidir
+  Scenario: The user can be able to see that he/she cannot play the Casino game without a balance
 
-    Given kullanici tour sayfasına gelebilmeli
-    When kullanici login olabilmeli
-    Then kullanici login oldugunu check edebilmelidir
-
-
-
-  Scenario: kullanici Casino oyununu bakiyesi olmadan oynayamadigini gorebilmelidir
-
-    Given kullanici tour sayfasindan login olabilmeli
-    When kullanici Casino sayfasina girdebilmeli
-    Then kullanici bakiyesi olmadan oyun oynayamadigini gorebilmelidir
+    Given The user can be able to login from tour page
+    When The user can be able to enter the Casino page
+    Then The user can be able to see that he/she cannot play without a balance
 
 
-  Scenario: kullanici Casino oyununda kazandiginda hesabindaki paranin artigini ve
-  kaybettiginde paranin azaldigini gorebilmelidir
+  Scenario:  when the user wins in the Casino game, the money in his/her account increases and
+    can be able to see that the money decreases when he/she lose
 
-    Given kullanici tour sayfasindan login olup Casino sayfasina gidebilmeli
-    When kullanici hesabina para yükleyebilmeli ve check edebilmeli
-    And kullanici Casino oyununda secenekleri kontrol edebilmeli
-    Then kullanici oyundan  kazanc elde ettiginde bakiyesinin arttigini ve kaybettiginde bakiyenin azaldigini gorebilmelidir
-
-
-  Scenario: kullanici Lottery'de satin alabilmeli ve bakiyenin guncellendigini gormelidir
-
-    Given kullanici tour sayfasindan login olup Lottery sayfasina gidebilmeli
-    When kullanici tek bilet olarak Lottery satin alabilmeli
-    Then kulllanici satin almadan sonra bakiyedeki degisimi gorebilmelidir
+    Given The user can be able to login from the tour page and go to the Casino page
+    When The user can be able to top up and check his/her account
+    And The user can be able to control the options in the Casino game
+    Then the user can be able to see that his/her balance increases when his/her win and decreases when his/her lose
 
 
+  Scenario: The user can be able to buy in the Lottery and see the balance updated
 
-  Scenario: kullanici Lottery'de yeni lotteryleri ekleyebilmeli, secim yapabilmeli, satın alabilmeli ve bakiyenin guncellendigini gormelidir
+    Given The user can be able to login from the tour page and go to the Lottery page
+    When The user can be able to add new lottery
+    And The user can be able to buy Lottery as a single ticket
+    And THe user can be able to buy lotteries
+    Then The user can be able to see the change in the balance after the purchase
 
-    Given kullanici tour sayfasindan login olup Lottery sayfasina gidebilmeli
-    When kullanici yeni lotteryler ekleyebilmeli
-    And kullanici yeni lotterylere secim yapabilmeli
-    And kullanici lotteryleri satin alabilmeli
-    Then kulllanici satin almadan sonra bakiyedeki degisimi gorebilmelidir
 
+  Scenario: The user can be able to add new lotteries in Lottery, make selections,
+  make purchases and see the balance updated
+
+    Given The user can be able to login from the tour page and go to the Lottery page
+    Then The user can be able to add new lotteries
+    And The user can be able to choose new lotteries
+    And THe user can be able to buy lotteries
+    Then The user can be able to see the change in the balance after the purchase
 
 
 

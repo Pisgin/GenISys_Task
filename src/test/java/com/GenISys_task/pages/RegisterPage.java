@@ -9,9 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class registerPage {
+public class RegisterPage {
 
-    public registerPage(){
+    public RegisterPage(){
 
         PageFactory.initElements(Driver.getDriver() , this);
     }
@@ -78,7 +78,6 @@ public class registerPage {
 
         newUserButton.click();
         BrowserUtils.sleep(1);
-
         confirmButton.click();
         BrowserUtils.sleep(1);
     }
@@ -87,7 +86,6 @@ public class registerPage {
 
         emailBox.sendKeys(email);
         BrowserUtils.sleep(1);
-
         emailPage_enterButton.click();
         BrowserUtils.sleep(1);
     }
@@ -97,7 +95,6 @@ public class registerPage {
         countryCode.sendKeys(randomCountryCode);
         phoneNumber.sendKeys(randomNumber);
         BrowserUtils.sleep(1);
-
         phonePage_enterButton.click();
         BrowserUtils.sleep(1);
     }
@@ -106,7 +103,6 @@ public class registerPage {
 
         fullnameBox.sendKeys(fullname);
         BrowserUtils.sleep(1);
-
         fullnamePage_enterButton.click();
         BrowserUtils.sleep(1);
     }
@@ -115,7 +111,6 @@ public class registerPage {
 
         passwordBox.sendKeys(password);
         BrowserUtils.sleep(1);
-
         passwordPage_enterButton.click();
         BrowserUtils.sleep(1);
     }
@@ -135,6 +130,5 @@ public class registerPage {
         Assert.assertEquals( actual_result , expected_result );
 
     }
-
 
 }
